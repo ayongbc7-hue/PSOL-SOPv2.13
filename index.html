@@ -76,8 +76,15 @@ body.lang-bm .en{display:none;}
 /* ══ PAGE TRANSITIONS ══ */
 .page{display:none;}
 .page.active{display:block;opacity:1;}
-.page.active.nav-in{animation:fadeIn .12s ease forwards;}
-@keyframes fadeIn{from{opacity:0;}to{opacity:1;}}
+/* page-fade-overlay handles transitions */
+#page-fade-overlay{
+  position:fixed;inset:0;z-index:8888;
+  background:var(--bg,#eceff5);
+  pointer-events:none;
+  opacity:0;
+  transition:opacity .18s ease;
+  will-change:opacity;
+}
 
 /* ══ NAV — vertical sidebar, minimized-by-default, hover-to-expand ══ */
 :root{--sidebar-w:222px;--sidebar-w-min:68px;}
@@ -1031,7 +1038,7 @@ h1,h2,h3,h4,h5,h6,
     </div>
     <button class="splash-nav-btn" id="splash-next" onclick="splashNav(1)">&#8250;</button>
   </div>
-  <button id="splash-skip" onclick="splashFinish()"><span class="en">Skip &amp; Login &#8594;</span><span class="bm">Langkau &amp; Log Masuk &#8594;</span><span class="zh">&#36339;&#36807;&#24182;&#30331;&#24405; &#8594;</span></button>
+  <button id="splash-skip" onclick="splashFinish()"><span class="en">Skip &amp; Login &#8594;</span><span class="bm">Langkau &amp; Log Masuk &#8594;</span></button>
 </div>
 
 <div id="login-overlay" style="display:none;opacity:0;">
@@ -1047,6 +1054,7 @@ h1,h2,h3,h4,h5,h6,
   </div>
 </div>
 
+<div id="page-fade-overlay" aria-hidden="true"></div>
 <div id="main-app">
 <div id="greeting-banner"></div>
 <button id="nav-burger" onclick="toggleSidebar()" aria-label="Toggle menu">☰</button>
@@ -1055,8 +1063,8 @@ h1,h2,h3,h4,h5,h6,
   <button id="nav-pin-btn" onclick="toggleNavPin(event)" title="Pin sidebar open">📌</button>
   <div class="nav-brand" onclick="navigate('home')"><img src="data:image/png;base64,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" style="height:24px;vertical-align:middle;margin-right:5px;flex-shrink:0;" alt="Pekat"> <span class="nav-brand-text">Pekat Solar</span></div>
   <nav class="nav-links">
-    <button class="nav-link active" data-page="home"      onclick="navigate('home')"><span class="nav-ico">🏠</span><span class="nav-label"><span class="en">Home</span><span class="bm">Utama</span><span class="zh">首页</span></span></button>
-    <button class="nav-link"        data-page="flow"      onclick="navigate('flow')"><span class="nav-ico">🔄</span><span class="nav-label"><span class="en">Flowchart</span><span class="bm">Carta Alir</span><span class="zh">流程图</span></span></button>
+    <button class="nav-link active" data-page="home"      onclick="navigate('home')"><span class="nav-ico">🏠</span><span class="nav-label"><span class="en">Home</span><span class="bm">Utama</span></span></button>
+    <button class="nav-link"        data-page="flow"      onclick="navigate('flow')"><span class="nav-ico">🔄</span><span class="nav-label"><span class="en">Flowchart</span><span class="bm">Carta Alir</span></span></button>
     <button class="nav-link"        data-page="workscope" onclick="navigate('workscope')"><span class="nav-ico">🗂️</span><span class="nav-label"><span class="en">WorkScope Table</span><span class="bm">Jadual Skop Kerja</span></span></button>
     <button class="nav-link"        data-page="teams"     onclick="navigate('teams')"><span class="nav-ico">👥</span><span class="nav-label"><span class="en">Teams</span><span class="bm">Pasukan</span></span></button>
     <button class="nav-link"        data-page="faq"       onclick="navigate('faq')"><span class="nav-ico">❓</span><span class="nav-label"><span class="en">A&amp;L FAQ</span><span class="bm">Soalan A&amp;L</span></span></button>
@@ -4689,12 +4697,12 @@ function toggleTheme() {
 function toggleLang() {
   var body = document.body;
   var txt = document.getElementById('lang-btn-text');
-  var LANGS = ['en','bm','zh'];
-  var LBLS  = {en:'BM', bm:'中文', zh:'EN'};
+  var LANGS = ['en','bm'];
+  var LBLS  = {en:'BM', bm:'EN'};
   var cur = body.classList.contains('lang-bm') ? 'bm'
-          : body.classList.contains('lang-zh') ? 'zh' : 'en';
+          : 'en';
   var nxt = LANGS[(LANGS.indexOf(cur)+1) % LANGS.length];
-  body.classList.remove('lang-bm','lang-zh');
+  body.classList.remove('lang-bm');
   if (nxt !== 'en') body.classList.add('lang-'+nxt);
   if (txt) txt.textContent = LBLS[nxt] || 'BM';
   try { localStorage.setItem('sop-lang', nxt); } catch(e){}
@@ -4726,26 +4734,31 @@ var currentPage = 'home';
 function navigate(pageId) {
   var old = document.getElementById('page-' + currentPage);
   var next = document.getElementById('page-' + pageId);
-  if (!next) return;
-  if (pageId === currentPage) return;
-  // Remove active + animation class from old page
-  if (old) old.classList.remove('active', 'nav-in');
-  // Add active + nav-in so entry animation fires only during navigation
-  next.classList.add('active', 'nav-in');
-  currentPage = pageId;
-  window.scrollTo({top:0,behavior:'smooth'});
-  updateNav(pageId);
-  document.body.classList.remove('nav-open');
-  // Page-specific post-render hooks
-  if (pageId === 'flow') {
-    setTimeout(function(){ var btn = document.getElementById('fc-fit'); if (btn) btn.click(); }, 80);
-  }
-  if (pageId === 'org') {
-    setTimeout(function(){ if (typeof drawOCLines === 'function') drawOCLines(); }, 150);
-  }
-  if (DEPT_PAGE_CFG && DEPT_PAGE_CFG[pageId]) {
-    setTimeout(function(){ renderDeptMemberSection(pageId); }, 60);
-  }
+  if (!next || pageId === currentPage) return;
+  var fov = document.getElementById('page-fade-overlay');
+  // Step 1: fade screen OUT (overlay fades in)
+  if (fov) fov.style.opacity = '1';
+  setTimeout(function() {
+    // Step 2: swap page while screen is covered
+    if (old) old.classList.remove('active', 'nav-in');
+    next.classList.add('active');
+    currentPage = pageId;
+    window.scrollTo({top:0,behavior:'instant'});
+    updateNav(pageId);
+    document.body.classList.remove('nav-open');
+    // Step 3: fade screen IN (overlay fades out)
+    if (fov) requestAnimationFrame(function(){ fov.style.opacity = '0'; });
+    // Page-specific post-render hooks
+    if (pageId === 'flow') {
+      setTimeout(function(){ var btn = document.getElementById('fc-fit'); if (btn) btn.click(); }, 100);
+    }
+    if (pageId === 'org') {
+      setTimeout(function(){ if (typeof drawOCLines === 'function') drawOCLines(); }, 200);
+    }
+    if (DEPT_PAGE_CFG && DEPT_PAGE_CFG[pageId]) {
+      setTimeout(function(){ renderDeptMemberSection(pageId); }, 80);
+    }
+  }, 180);
 }
 function updateNav(pageId) {
   document.querySelectorAll('.nav-link').forEach(function(el){
@@ -5077,17 +5090,16 @@ document.addEventListener('DOMContentLoaded', function(){
   var tb = document.getElementById('theme-btn');
   var tIco = tb ? tb.querySelector('.nav-ico') : null;
   if (tIco) tIco.textContent = _theme === 'dark' ? '☀' : '🌙';
-  // login enter key — document-level, fires whenever overlay is visible
-  document.addEventListener('keydown', function(e){
-    var lo=document.getElementById('login-overlay');
-    if(!lo||lo.style.display==='none'||lo.style.opacity==='0')return;
+  // login enter key — direct input listeners (most reliable)
+  var _elId=document.getElementById('login-id');
+  var _elPw=document.getElementById('login-pass');
+  if(_elId) _elId.addEventListener('keydown',function(e){
     if(e.key!=='Enter')return;
-    var af=document.activeElement;
-    if(af&&af.id==='login-id'){
-      var pw=document.getElementById('login-pass');
-      if(pw&&pw.value===''){pw.focus();return;}
-    }
-    doLogin();
+    var pw=document.getElementById('login-pass');
+    if(pw&&pw.value.length>0){doLogin();}else if(pw){pw.focus();}
+  });
+  if(_elPw) _elPw.addEventListener('keydown',function(e){
+    if(e.key==='Enter'){doLogin();}
   });
 });
 
@@ -6338,9 +6350,7 @@ body,.step-card,.step-header,.step-body,.team-card,.home-card,
 <style id="v2-2-ext">
 
 /* === SOP v2.2 EXTENSION CSS === */
-.zh { display: none; }
-body.lang-zh .zh { display: inline; }
-body.lang-zh .en, body.lang-zh .bm { display: none; }
+/* zh language removed */
 
 #app-banner {
   position: relative; min-height: 150px; overflow: hidden;
@@ -6975,7 +6985,7 @@ select, textarea {
   function resetTimer(){clearInterval(timer);timer=setInterval(function(){if(cur<TOTAL-1)showSlide(cur+1);else clearInterval(timer);},INTERVAL);}
   var sl='';try{sl=localStorage.getItem('sop-lang')||'en';}catch(e){sl='en';}
   if(sl==='bm')document.body.classList.add('lang-bm');
-  if(sl==='zh')document.body.classList.add('lang-zh');
+  /* zh removed */
   document.addEventListener('DOMContentLoaded',function(){showSlide(0);resetTimer();});
   var tx0=0;
   document.addEventListener('touchstart',function(e){var ov=document.getElementById('splash-overlay');if(!ov||ov.style.display==='none')return;tx0=e.touches[0].clientX;},{passive:true});
@@ -7001,7 +7011,7 @@ select, textarea {
     var bv=document.querySelector('.banner-version');if(bv)bv.textContent='v2.11 \u00B7 July 2026';
     var sl='';try{sl=localStorage.getItem('sop-lang')||'en';}catch(e){sl='en';}
     if(sl==='bm'){document.body.classList.add('lang-bm');var t=document.getElementById('lang-btn-text');if(t)t.textContent='EN';}
-    if(sl==='zh'){document.body.classList.add('lang-zh');var t2=document.getElementById('lang-btn-text');if(t2)t2.textContent='BM';}
+    /* zh removed */
   });
 })();
 
