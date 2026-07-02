@@ -74,11 +74,10 @@ body.lang-bm .bm{display:inline;}
 body.lang-bm .en{display:none;}
 
 /* ══ PAGE TRANSITIONS ══ */
-.page{display:none;opacity:0;transition:opacity .35s ease;}
-.page.active{display:block;animation:fadeIn .35s forwards;}
+.page{display:none;}
+.page.active{display:block;opacity:1;}
+.page.active.nav-in{animation:fadeIn .3s ease forwards;}
 @keyframes fadeIn{from{opacity:0;transform:translateY(8px);}to{opacity:1;transform:translateY(0);}}
-@keyframes fadeOut{from{opacity:1;transform:translateY(0);}to{opacity:0;transform:translateY(-8px);}}
-.page.page-exiting{display:block!important;animation:fadeOut .22s forwards;pointer-events:none;}
 
 /* ══ NAV — vertical sidebar, minimized-by-default, hover-to-expand ══ */
 :root{--sidebar-w:222px;--sidebar-w-min:68px;}
@@ -4721,34 +4720,23 @@ function navigate(pageId) {
   var next = document.getElementById('page-' + pageId);
   if (!next) return;
   if (pageId === currentPage) return;
+  // Remove active + animation class from old page
+  if (old) old.classList.remove('active', 'nav-in');
+  // Add active + nav-in so entry animation fires only during navigation
+  next.classList.add('active', 'nav-in');
   currentPage = pageId;
+  window.scrollTo({top:0,behavior:'smooth'});
   updateNav(pageId);
   document.body.classList.remove('nav-open');
-  function _showNext() {
-    next.classList.add('active');
-    window.scrollTo({top:0,behavior:'smooth'});
-    // Auto-fit flowchart when navigating to it
-    if (pageId === 'flow') {
-      setTimeout(function(){ var btn = document.getElementById('fc-fit'); if (btn) btn.click(); }, 80);
-    }
-    // Draw org chart connector lines when navigating to org page
-    if (pageId === 'org') {
-      setTimeout(function(){ if (typeof drawOCLines === 'function') drawOCLines(); }, 150);
-    }
-    /* render dept member section */
-    if (DEPT_PAGE_CFG && DEPT_PAGE_CFG[pageId]) {
-      setTimeout(function(){ renderDeptMemberSection(pageId); }, 60);
-    }
+  // Page-specific post-render hooks
+  if (pageId === 'flow') {
+    setTimeout(function(){ var btn = document.getElementById('fc-fit'); if (btn) btn.click(); }, 80);
   }
-  if (old && old !== next && old.classList.contains('active')) {
-    old.classList.add('page-exiting');
-    setTimeout(function() {
-      old.classList.remove('active', 'page-exiting');
-      _showNext();
-    }, 230);
-  } else {
-    if (old) old.classList.remove('active');
-    _showNext();
+  if (pageId === 'org') {
+    setTimeout(function(){ if (typeof drawOCLines === 'function') drawOCLines(); }, 150);
+  }
+  if (DEPT_PAGE_CFG && DEPT_PAGE_CFG[pageId]) {
+    setTimeout(function(){ renderDeptMemberSection(pageId); }, 60);
   }
 }
 function updateNav(pageId) {
