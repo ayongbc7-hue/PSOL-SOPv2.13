@@ -76,8 +76,8 @@ body.lang-bm .en{display:none;}
 /* ══ PAGE TRANSITIONS ══ */
 .page{display:none;}
 .page.active{display:block;opacity:1;}
-.page.active.nav-in{animation:fadeIn .3s ease forwards;}
-@keyframes fadeIn{from{opacity:0;transform:translateY(8px);}to{opacity:1;transform:translateY(0);}}
+.page.active.nav-in{animation:fadeIn .12s ease forwards;}
+@keyframes fadeIn{from{opacity:0;}to{opacity:1;}}
 
 /* ══ NAV — vertical sidebar, minimized-by-default, hover-to-expand ══ */
 :root{--sidebar-w:222px;--sidebar-w-min:68px;}
@@ -2839,17 +2839,17 @@ function ocbPhotoLoad(inp){
 
 /* ══ DEPT CARD CLICK → toggle member list ══ */
 function ocbDeptCardClick(e,dk){
-  if(ocbEditMode){e.stopPropagation();return;} /* in edit mode, card is for editing text */
   var ml=document.getElementById('ocb-ml-'+dk);
   if(!ml)return;
   var isOpen=ml.classList.contains('show');
-  /* close others */
-  document.querySelectorAll('.ocb-member-list.show').forEach(function(x){x.classList.remove('show');});
-  ocbOpenDept=null;
   if(!isOpen){
     ocbRenderMemberList(dk);
     ml.classList.add('show');
     ocbOpenDept=dk;
+  } else if(!ocbEditMode){
+    /* view mode: click to toggle closed; edit mode: keep open */
+    ml.classList.remove('show');
+    if(ocbOpenDept===dk)ocbOpenDept=null;
   }
   setTimeout(ocbDrawLines,50);
 }
@@ -3031,16 +3031,24 @@ function ocbToggleEdit(){
   if(btn){btn.textContent=ocbEditMode?'✅ Done Editing':'✏️ Edit Mode';btn.classList.toggle('active',ocbEditMode);}
   var wrap=document.getElementById('oc-bubble-wrap');
   if(wrap)wrap.classList.toggle('ocb-edit-active',ocbEditMode);
+  /* entering edit mode: expand ALL dept panels at once */
+  if(ocbEditMode){
+    Object.keys(OCB_DEPT_COLS).forEach(function(dk){
+      var ml=document.getElementById('ocb-ml-'+dk);
+      if(ml&&!ml.classList.contains('show')){ocbRenderMemberList(dk);ml.classList.add('show');}
+    });
+  }
   /* toggle name/role on director/top nodes */
   document.querySelectorAll('.ocb-node:not(.dept-node) .ocb-name,.ocb-node:not(.dept-node) .ocb-role').forEach(function(el){
     el.contentEditable=ocbEditMode?'true':'false';
     el.style.cursor=ocbEditMode?'text':'default';
   });
-  /* re-render all open member lists */
+  /* re-render all open member lists to pick up new edit state */
   document.querySelectorAll('.ocb-member-list.show').forEach(function(ml){
     var dk=ml.id.replace('ocb-ml-','');
     ocbRenderMemberList(dk);
   });
+  setTimeout(ocbDrawLines,120);
 }
 
 /* ══ COLLAPSE / EXPAND directors ══ */
@@ -4778,7 +4786,7 @@ function doLogin() {
   if (id === 'PekatSolar' && pass === 'psol123') {
     document.getElementById('login-overlay').style.display = 'none';
     document.getElementById('main-app').style.display = 'block';
-    document.getElementById('theme-btn').textContent = _theme === 'dark' ? '☀' : '🌙';
+    var _tIco=document.querySelector('#theme-btn .nav-ico');if(_tIco)_tIco.textContent=_theme==='dark'?'☀':'🌙';
 
   } else {
     document.getElementById('login-error').style.display = 'block';
@@ -5067,11 +5075,19 @@ document.addEventListener('DOMContentLoaded', function(){
   // apply saved theme
   document.documentElement.setAttribute('data-theme', _theme);
   var tb = document.getElementById('theme-btn');
-  if (tb) tb.textContent = _theme === 'dark' ? '☀' : '🌙';
-  // login enter key
-  ['login-pass','login-id'].forEach(function(id){
-    var el = document.getElementById(id);
-    if(el) el.addEventListener('keydown', function(e){ if(e.key==='Enter') { if(id==='login-id') document.getElementById('login-pass').focus(); else doLogin(); }});
+  var tIco = tb ? tb.querySelector('.nav-ico') : null;
+  if (tIco) tIco.textContent = _theme === 'dark' ? '☀' : '🌙';
+  // login enter key — document-level, fires whenever overlay is visible
+  document.addEventListener('keydown', function(e){
+    var lo=document.getElementById('login-overlay');
+    if(!lo||lo.style.display==='none'||lo.style.opacity==='0')return;
+    if(e.key!=='Enter')return;
+    var af=document.activeElement;
+    if(af&&af.id==='login-id'){
+      var pw=document.getElementById('login-pass');
+      if(pw&&pw.value===''){pw.focus();return;}
+    }
+    doLogin();
   });
 });
 
@@ -8846,12 +8862,9 @@ var DEPT_MEMBERS = {
     {ini:'NK',nm:'Ng Kae Zhe',                   rl:'Executive'}
   ],
   pt:[
-    {ini:'SA',nm:'Shazri Ali',          rl:'Project Manager'},
-    {ini:'CC',nm:'Calvin Christie',     rl:'Project Manager'},
-    {ini:'LW',nm:'Lee Wen Li',          rl:'Senior Executive'},
-    {ini:'MM',nm:'Mohd Mazis (Hamdi)',  rl:'Manager – PostC/QS'},
-    {ini:'MF',nm:'Muhammad Faiz',       rl:'Executive'},
-    {ini:'NA',nm:'Noor Azhari',         rl:'Senior Executive'}
+    {ini:'SA',nm:'Shazri Ali',      rl:'Project Manager – Northern'},
+    {ini:'CC',nm:'Calvin Christie', rl:'Project Manager – Central'},
+    {ini:'LW',nm:'Lee Wen Li',      rl:'Senior Executive – Central'}
   ],
   sc:[
     {ini:'NI',nm:'Nur Idayu',    rl:'Associate Manager'},
@@ -8919,6 +8932,10 @@ function renderDeptMemberSection(pageKey){
     html+='<div style="padding:14px 0;color:var(--text-m);font-size:12px;font-style:italic;text-align:center;">No members yet — click <b>Edit Members</b> to add.</div>';
   }
 
+  var _mvOpts=Object.keys(DEPT_PAGE_CFG).filter(function(pk){return DEPT_PAGE_CFG[pk].dk!==dk;})
+    .map(function(pk){var cc=DEPT_PAGE_CFG[pk];return '<option value="'+pk+'">'+cc.title.replace(' Team','')+'</option>';})
+    .join('');
+
   members.forEach(function(m,i){
     var ini=(m.ini||'?');
     html+='<div class="dept-member-card" style="align-items:'+(editMode?'flex-start':'center')+'">';
@@ -8928,14 +8945,16 @@ function renderDeptMemberSection(pageKey){
       html+='<input class="dm-inp" value="'+escHtml(m.nm||'')+'" '
         +'oninput="deptSaveMember(\''+dk+'\','+i+',\'nm\',this.value)" placeholder="Full Name"/>'
         +'<input class="dm-inp dm-inp-sm" value="'+escHtml(m.rl||'')+'" '
-        +'oninput="deptSaveMember(\''+dk+'\','+i+',\'rl\',this.value)" placeholder="Role / Position"/>';
+        +'oninput="deptSaveMember(\''+dk+'\','+i+',\'rl\',this.value)" placeholder="Role / Position"/>'
+        +'<select class="dm-move-sel" onchange="deptMoveMember(\''+dk+'\','+i+',this.value,\''+pageKey+'\');this.value=\'\'">'
+        +'<option value="">&#8594; Move to dept</option>'+_mvOpts+'</select>';
     } else {
       html+='<div class="dept-member-nm">'+escHtml(m.nm||'')+'</div>'
            +'<div class="dept-member-rl">'+escHtml(m.rl||'')+'</div>';
     }
     html+='</div>';
     if(editMode){
-      html+='<button class="dm-del-btn" onclick="deptDelMember(\''+dk+'\','+i+',\''+pageKey+'\')">&#10005;</button>';
+      html+='<button class="dm-del-btn" onclick="deptDelMember(\''+dk+'\','+i+',\''+pageKey+'\')">✕</button>';
     }
     html+='</div>';
   });
@@ -8976,6 +8995,16 @@ function deptAddMember(dk, pageKey){
   renderDeptMemberSection(pageKey);
 }
 
+function deptMoveMember(fromDk, idx, toPageKey, fromPageKey){
+  if(!toPageKey||!DEPT_MEMBERS[fromDk]) return;
+  var toDk=DEPT_PAGE_CFG[toPageKey]?DEPT_PAGE_CFG[toPageKey].dk:null;
+  if(!toDk) return;
+  var m=DEPT_MEMBERS[fromDk].splice(idx,1)[0];
+  if(!DEPT_MEMBERS[toDk]) DEPT_MEMBERS[toDk]=[];
+  DEPT_MEMBERS[toDk].push(m);
+  saveDeptMembersLS();
+  renderDeptMemberSection(fromPageKey);
+}
 function deptDelMember(dk, idx, pageKey){
   if(!DEPT_MEMBERS[dk]) return;
   DEPT_MEMBERS[dk].splice(idx,1);
@@ -9016,6 +9045,8 @@ function deptDelMember(dk, idx, pageKey){
 .dm-inp{border:1.5px solid var(--bd-t,#dde3ec);border-radius:5px;padding:4px 8px;font-size:11px;color:var(--text-p,#1c2b3a);background:var(--surface,#fff);width:calc(100% - 18px);box-sizing:border-box;margin-bottom:2px;outline:none;}
 .dm-inp:focus{border-color:var(--bd-p,#5b7fa6);}
 .dm-inp-sm{font-size:10px;color:var(--text-m,#6b7f96);}
+.dm-move-sel{margin-top:3px;font-size:10px;padding:2px 5px;border:1px solid var(--border,#cdd4e8);border-radius:5px;background:var(--surface,#fff);color:var(--text-s,#3d4b6b);cursor:pointer;width:100%;box-sizing:border-box;}
+.dm-move-sel:focus{outline:none;border-color:var(--bd-p,#5b7fa6);}
 .dm-del-btn{background:#dc3545;color:#fff;border:none;border-radius:5px;padding:2px 8px;cursor:pointer;font-size:11px;align-self:flex-start;margin-left:6px;line-height:1.5;flex-shrink:0;}
 .dm-add-btn{margin-top:10px;border:none;border-radius:8px;padding:7px 0;cursor:pointer;font-size:12px;font-weight:700;width:100%;letter-spacing:.3px;}
 </style>
