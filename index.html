@@ -94,13 +94,13 @@ body.lang-bm .en{display:none;}
 .nav-links{display:flex;flex-direction:column;gap:2px;overflow-y:visible;}
 .nav-link{background:none;border:none;color:var(--nav-text);opacity:.72;font-size:13.5px;padding:10px 12px;border-radius:9px;cursor:pointer;white-space:nowrap;text-align:left;display:flex;align-items:center;gap:10px;transition:all .15s;width:100%;}
 .nav-link .nav-ico{font-size:16px;width:18px;text-align:center;flex-shrink:0;}
-.nav-link:hover,.nav-link.active{background:rgba(232,80,10,.25);color:#fff;opacity:1;}
-.nav-link.active{box-shadow:inset 3px 0 0 #E8500A;}
+.nav-link:hover,.nav-link.active{background:var(--nav-glow);color:#fff;opacity:1;}
+.nav-link.active{box-shadow:inset 3px 0 0 var(--nav-edge);}
 .nav-spacer{flex:1;}
 #nav-clock{color:rgba(255,255,255,.55);font-size:10.5px;padding:8px 12px 2px;white-space:nowrap;font-variant-numeric:tabular-nums;letter-spacing:.3px;border-top:1px solid rgba(255,255,255,.1);margin-top:8px;}
 .nav-ctrl{display:flex;flex-direction:column;gap:6px;flex-shrink:0;padding-top:6px;}
 .nav-btn{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);color:#fff;padding:8px 12px;border-radius:8px;cursor:pointer;font-size:12px;font-weight:700;white-space:nowrap;transition:background .2s;width:100%;text-align:center;overflow:hidden;}
-.nav-btn:hover{background:rgba(232,80,10,.4);}
+.nav-btn:hover{background:var(--nav-glow);}
 #main-nav .nav-label,#main-nav .nav-brand-text,#main-nav #nav-clock,#main-nav .nav-btn-text{opacity:0;width:0;display:inline-block;overflow:hidden;transition:opacity .12s;}
 #main-nav:hover .nav-label,#main-nav.pinned .nav-label,#main-nav:hover .nav-brand-text,#main-nav.pinned .nav-brand-text,#main-nav:hover .nav-btn-text,#main-nav.pinned .nav-btn-text{opacity:1;width:auto;}
 #main-nav:hover #nav-clock,#main-nav.pinned #nav-clock{opacity:1;width:auto;display:block;}
@@ -861,6 +861,39 @@ h1,h2,h3,h4,h5,h6,
   box-shadow: 0 2px 0 rgba(0,0,0,.15), 0 3px 6px rgba(0,0,0,.08) !important;
 }
 
+
+/* ── DEPT MEMBER COLLAPSIBLE PANEL ──────────────────────────── */
+.dept-members-panel{margin-top:18px;}
+.dept-members-hdr2{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:10px 16px;gap:10px;
+  background:var(--surface2);border-radius:10px;
+  border:1px solid var(--border);
+}
+.dept-members-toggle2{
+  display:flex;align-items:center;gap:6px;
+  font-size:13px;font-weight:700;cursor:pointer;
+  flex:1;user-select:none;padding:2px 0;
+}
+.dept-members-toggle2:hover{opacity:.75;}
+.dm-arrow2{
+  display:inline-block;font-size:11px;
+  transition:transform .22s ease;flex-shrink:0;
+}
+.dept-members-body2{padding:8px 2px 2px;}
+.dm-count2{font-size:11px;color:var(--text-m);font-weight:500;margin-left:4px;}
+
+/* ── DEPT HERO BACKGROUND PATTERNS ──────────────────────────── */
+.dept-hero{position:relative;overflow:hidden;}
+.dept-hero-bd   {background:repeating-linear-gradient(60deg,rgba(255,255,255,.07) 0,rgba(255,255,255,.07) 2px,transparent 2px,transparent 28px),linear-gradient(135deg,#E8500A,#E8500ACC)!important;}
+.dept-hero-precon{background:radial-gradient(rgba(255,255,255,.11) 1.5px,transparent 1.5px) center/22px 22px,linear-gradient(135deg,#117A65,#117A65CC)!important;}
+.dept-hero-dd   {background:repeating-linear-gradient(0deg,rgba(255,255,255,.06) 0,rgba(255,255,255,.06) 1px,transparent 1px,transparent 26px),repeating-linear-gradient(90deg,rgba(255,255,255,.06) 0,rgba(255,255,255,.06) 1px,transparent 1px,transparent 26px),linear-gradient(135deg,#2471A3,#2471A3CC)!important;}
+.dept-hero-dr   {background:repeating-linear-gradient(45deg,rgba(255,255,255,.06) 0,rgba(255,255,255,.06) 1px,transparent 1px,transparent 12px);}
+.dept-hero-pt   {background:repeating-linear-gradient(-55deg,rgba(255,255,255,.08) 0,rgba(255,255,255,.08) 2px,transparent 2px,transparent 16px),linear-gradient(135deg,#2C3E63,#2C3E63CC)!important;}
+.dept-hero-sc   {background:radial-gradient(rgba(255,255,255,.1) 2px,transparent 2px) 0 0/28px 24px,radial-gradient(rgba(255,255,255,.1) 2px,transparent 2px) 14px 12px/28px 24px,linear-gradient(135deg,#CA8A04,#CA8A04CC)!important;}
+.dept-hero-al   {background:repeating-linear-gradient(0deg,rgba(255,255,255,.07) 0,rgba(255,255,255,.07) 1px,transparent 1px,transparent 18px),linear-gradient(135deg,#16A085,#16A085CC)!important;}
+.dept-hero-postc{background:repeating-linear-gradient(45deg,rgba(255,255,255,.06) 0,rgba(255,255,255,.06) 1px,transparent 1px,transparent 20px),repeating-linear-gradient(-45deg,rgba(255,255,255,.06) 0,rgba(255,255,255,.06) 1px,transparent 1px,transparent 20px),linear-gradient(135deg,#C0392B,#C0392BCC)!important;}
+.dept-hero-safety{background:radial-gradient(circle at 50% 50%,rgba(255,255,255,.09) 0,rgba(255,255,255,.09) 4px,transparent 4px,transparent 20px,rgba(255,255,255,.04) 20px,rgba(255,255,255,.04) 21px,transparent 21px) 0 0/36px 36px,linear-gradient(135deg,#945F1E,#945F1ECC)!important;}
 </style>
 
 <style id="v2-5-css">
@@ -2070,7 +2103,7 @@ Required?</text>
   <p class="en">Select a department to view step-by-step responsibilities and link to their tasks in the flowchart.</p>
   <p class="bm">Pilih jabatan untuk melihat tanggungjawab langkah demi langkah dan pautan ke tugasan mereka dalam carta alir.</p>
 </div>
-<div class="vla-wrap"><div class="vla-title">⚡ Quick Jump — Click to go to a department</div><div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:6px;"><div onclick="navigate('dept-bd')" style="cursor:pointer;padding:8px 14px;border-radius:10px;background:#E8500A;color:#fff;font-weight:700;font-size:12px;box-shadow:0 3px 0 rgba(0,0,0,.2),0 5px 12px rgba(0,0,0,.12);transition:.15s;" onmouseover="this.style.transform='translateY(-3px)'" onmouseout="this.style.transform=''">Business Dev<div style="font-size:10px;font-weight:400;opacity:.85;margin-top:2px;">7 steps</div></div><div onclick="navigate('dept-precon')" style="cursor:pointer;padding:8px 14px;border-radius:10px;background:#27AE60;color:#fff;font-weight:700;font-size:12px;box-shadow:0 3px 0 rgba(0,0,0,.2),0 5px 12px rgba(0,0,0,.12);transition:.15s;" onmouseover="this.style.transform='translateY(-3px)'" onmouseout="this.style.transform=''">Pre-Commissioning<div style="font-size:10px;font-weight:400;opacity:.85;margin-top:2px;">5 steps</div></div><div onclick="navigate('dept-dd')" style="cursor:pointer;padding:8px 14px;border-radius:10px;background:#2471A3;color:#fff;font-weight:700;font-size:12px;box-shadow:0 3px 0 rgba(0,0,0,.2),0 5px 12px rgba(0,0,0,.12);transition:.15s;" onmouseover="this.style.transform='translateY(-3px)'" onmouseout="this.style.transform=''">Design & Drafting<div style="font-size:10px;font-weight:400;opacity:.85;margin-top:2px;">7 steps</div></div><div onclick="navigate('dept-pt')" style="cursor:pointer;padding:8px 14px;border-radius:10px;background:#7D3C98;color:#fff;font-weight:700;font-size:12px;box-shadow:0 3px 0 rgba(0,0,0,.2),0 5px 12px rgba(0,0,0,.12);transition:.15s;" onmouseover="this.style.transform='translateY(-3px)'" onmouseout="this.style.transform=''">Project Team<div style="font-size:10px;font-weight:400;opacity:.85;margin-top:2px;">11 steps</div></div><div onclick="navigate('dept-sc')" style="cursor:pointer;padding:8px 14px;border-radius:10px;background:#CA8A04;color:#fff;font-weight:700;font-size:12px;box-shadow:0 3px 0 rgba(0,0,0,.2),0 5px 12px rgba(0,0,0,.12);transition:.15s;" onmouseover="this.style.transform='translateY(-3px)'" onmouseout="this.style.transform=''">Supply Chain<div style="font-size:10px;font-weight:400;opacity:.85;margin-top:2px;">4 steps</div></div><div onclick="navigate('dept-al')" style="cursor:pointer;padding:8px 14px;border-radius:10px;background:#117A65;color:#fff;font-weight:700;font-size:12px;box-shadow:0 3px 0 rgba(0,0,0,.2),0 5px 12px rgba(0,0,0,.12);transition:.15s;" onmouseover="this.style.transform='translateY(-3px)'" onmouseout="this.style.transform=''">App & Licensing<div style="font-size:10px;font-weight:400;opacity:.85;margin-top:2px;">8 steps</div></div><div onclick="navigate('dept-postc')" style="cursor:pointer;padding:8px 14px;border-radius:10px;background:#B03A2E;color:#fff;font-weight:700;font-size:12px;box-shadow:0 3px 0 rgba(0,0,0,.2),0 5px 12px rgba(0,0,0,.12);transition:.15s;" onmouseover="this.style.transform='translateY(-3px)'" onmouseout="this.style.transform=''">Post Contract<div style="font-size:10px;font-weight:400;opacity:.85;margin-top:2px;">9 steps</div></div><div onclick="navigate('dept-safety')" style="cursor:pointer;padding:8px 14px;border-radius:10px;background:#C47B0E;color:#fff;font-weight:700;font-size:12px;box-shadow:0 3px 0 rgba(0,0,0,.2),0 5px 12px rgba(0,0,0,.12);transition:.15s;" onmouseover="this.style.transform='translateY(-3px)'" onmouseout="this.style.transform=''">Safety<div style="font-size:10px;font-weight:400;opacity:.85;margin-top:2px;">5 steps</div></div></div></div>
+<div class="vla-wrap"><div class="vla-title">⚡ Quick Jump — Click to go to a department</div><div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:6px;"><div onclick="navigate('dept-bd')" style="cursor:pointer;padding:8px 14px;border-radius:10px;background:#E8500A;color:#fff;font-weight:700;font-size:12px;box-shadow:0 3px 0 rgba(0,0,0,.2),0 5px 12px rgba(0,0,0,.12);transition:.15s;" onmouseover="this.style.transform='translateY(-3px)'" onmouseout="this.style.transform=''">Business Dev<div style="font-size:10px;font-weight:400;opacity:.85;margin-top:2px;">7 steps</div></div><div onclick="navigate('dept-precon')" style="cursor:pointer;padding:8px 14px;border-radius:10px;background:#27AE60;color:#fff;font-weight:700;font-size:12px;box-shadow:0 3px 0 rgba(0,0,0,.2),0 5px 12px rgba(0,0,0,.12);transition:.15s;" onmouseover="this.style.transform='translateY(-3px)'" onmouseout="this.style.transform=''">Pre-Commissioning<div style="font-size:10px;font-weight:400;opacity:.85;margin-top:2px;">5 steps</div></div><div onclick="navigate('dept-dd')" style="cursor:pointer;padding:8px 14px;border-radius:10px;background:#2471A3;color:#fff;font-weight:700;font-size:12px;box-shadow:0 3px 0 rgba(0,0,0,.2),0 5px 12px rgba(0,0,0,.12);transition:.15s;" onmouseover="this.style.transform='translateY(-3px)'" onmouseout="this.style.transform=''">Design Team<div style="font-size:10px;font-weight:400;opacity:.85;margin-top:2px;">7 steps</div></div><div onclick="navigate('dept-dr')" style="cursor:pointer;padding:8px 14px;border-radius:10px;background:#1565C0;color:#fff;font-weight:700;font-size:12px;box-shadow:0 3px 0 rgba(0,0,0,.2),0 5px 12px rgba(0,0,0,.12);transition:.15s;" onmouseover="this.style.transform='translateY(-3px)'" onmouseout="this.style.transform=''">Draughting Team<div style="font-size:10px;font-weight:400;opacity:.85;margin-top:2px;">2 steps</div></div><div onclick="navigate('dept-pt')" style="cursor:pointer;padding:8px 14px;border-radius:10px;background:#7D3C98;color:#fff;font-weight:700;font-size:12px;box-shadow:0 3px 0 rgba(0,0,0,.2),0 5px 12px rgba(0,0,0,.12);transition:.15s;" onmouseover="this.style.transform='translateY(-3px)'" onmouseout="this.style.transform=''">Project Team<div style="font-size:10px;font-weight:400;opacity:.85;margin-top:2px;">11 steps</div></div><div onclick="navigate('dept-sc')" style="cursor:pointer;padding:8px 14px;border-radius:10px;background:#CA8A04;color:#fff;font-weight:700;font-size:12px;box-shadow:0 3px 0 rgba(0,0,0,.2),0 5px 12px rgba(0,0,0,.12);transition:.15s;" onmouseover="this.style.transform='translateY(-3px)'" onmouseout="this.style.transform=''">Supply Chain<div style="font-size:10px;font-weight:400;opacity:.85;margin-top:2px;">4 steps</div></div><div onclick="navigate('dept-al')" style="cursor:pointer;padding:8px 14px;border-radius:10px;background:#117A65;color:#fff;font-weight:700;font-size:12px;box-shadow:0 3px 0 rgba(0,0,0,.2),0 5px 12px rgba(0,0,0,.12);transition:.15s;" onmouseover="this.style.transform='translateY(-3px)'" onmouseout="this.style.transform=''">App & Licensing<div style="font-size:10px;font-weight:400;opacity:.85;margin-top:2px;">8 steps</div></div><div onclick="navigate('dept-postc')" style="cursor:pointer;padding:8px 14px;border-radius:10px;background:#B03A2E;color:#fff;font-weight:700;font-size:12px;box-shadow:0 3px 0 rgba(0,0,0,.2),0 5px 12px rgba(0,0,0,.12);transition:.15s;" onmouseover="this.style.transform='translateY(-3px)'" onmouseout="this.style.transform=''">Post Contract<div style="font-size:10px;font-weight:400;opacity:.85;margin-top:2px;">9 steps</div></div><div onclick="navigate('dept-safety')" style="cursor:pointer;padding:8px 14px;border-radius:10px;background:#C47B0E;color:#fff;font-weight:700;font-size:12px;box-shadow:0 3px 0 rgba(0,0,0,.2),0 5px 12px rgba(0,0,0,.12);transition:.15s;" onmouseover="this.style.transform='translateY(-3px)'" onmouseout="this.style.transform=''">Safety<div style="font-size:10px;font-weight:400;opacity:.85;margin-top:2px;">5 steps</div></div></div></div>
 
 <div class="teams-grid"><div class="team-card" onclick="navigate('dept-bd')" style="border-top:4px solid #E8500A;">
 <div class="team-card-icon" style="color:#E8500A;">🔶 BD</div>
@@ -2085,9 +2118,15 @@ Required?</text>
 <div class="team-card-arrow">→</div>
 </div>
 <div class="team-card" onclick="navigate('dept-dd')" style="border-top:4px solid #2471A3;">
-<div class="team-card-icon" style="color:#2471A3;">🔵 D&D</div>
-<h3 class="en">Design & Drafting</h3><h3 class="bm">Rekabentuk & Pelan</h3>
-<p class="en">CAS/PSS, shop drawings, BOM, as-built</p><p class="bm">CAS/PSS, lukisan binaan, BOM, lukisan siap bina</p>
+<div class="team-card-icon" style="color:#2471A3;">🔵 Design</div>
+<h3 class="en">Design Team</h3><h3 class="bm">Pasukan Rekabentuk</h3>
+<p class="en">CAS/PSS, shop drawings, electrical & structural design</p><p class="bm">CAS/PSS, lukisan binaan, rekabentuk elektrik & struktur</p>
+<div class="team-card-arrow">→</div>
+</div>
+<div class="team-card" onclick="navigate('dept-dr')" style="border-top:4px solid #1565C0;">
+<div class="team-card-icon" style="color:#1565C0;">📐 DR</div>
+<h3 class="en">Draughting Team</h3><h3 class="bm">Pasukan Pelan Teknikal</h3>
+<p class="en">As-built drawings, BOM, technical layouts, drawing archives</p><p class="bm">Lukisan siap bina, BOM, pelan teknikal, arkib lukisan</p>
 <div class="team-card-arrow">→</div>
 </div>
 <div class="team-card" onclick="navigate('dept-pt')" style="border-top:4px solid #2C3E63;">
@@ -2621,9 +2660,14 @@ Required?</text>
   <div class="ocb-member-list" id="ocb-ml-sc" ondragover="event.preventDefault()" ondrop="ocbDrop(event,'sc')"></div>
 </div>
           <div class="ocb-node dept-node" data-id="dept-dd" data-dept="dd" style="--nc:#1565C0;--nc2:#42A5F5;">
-  <div class="ocb-av-wrap" onclick="ocbAvatarClick(event,this)"><div class="ocb-av"><img class="ocb-photo" src="" alt=""><svg class="ocb-person-icon" viewBox="0 0 44 55" fill="none"><circle cx="22" cy="16" r="12" fill="#999"/><path d="M4 52 Q4 34 22 34 Q40 34 40 52 Z" fill="#999"/></svg></div><div class="ocb-badge">D&D</div><input type="file" class="ocb-file-in" accept="image/*" style="display:none" onchange="ocbPhotoLoad(this)"></div>
-  <div class="ocb-card" onclick="ocbDeptCardClick(event,'dd')"><div class="ocb-name" contenteditable="false">Design &amp; Drafting</div><div class="ocb-role" contenteditable="false" id="ocb-role-dd">Click to view team</div><div class="ocb-count" id="ocb-cnt-dd"></div></div>
+  <div class="ocb-av-wrap" onclick="ocbAvatarClick(event,this)"><div class="ocb-av"><img class="ocb-photo" src="" alt=""><svg class="ocb-person-icon" viewBox="0 0 44 55" fill="none"><circle cx="22" cy="16" r="12" fill="#999"/><path d="M4 52 Q4 34 22 34 Q40 34 40 52 Z" fill="#999"/></svg></div><div class="ocb-badge">Design</div><input type="file" class="ocb-file-in" accept="image/*" style="display:none" onchange="ocbPhotoLoad(this)"></div>
+  <div class="ocb-card" onclick="ocbDeptCardClick(event,'dd')"><div class="ocb-name" contenteditable="false">Design</div><div class="ocb-role" contenteditable="false" id="ocb-role-dd">Click to view team</div><div class="ocb-count" id="ocb-cnt-dd"></div></div>
   <div class="ocb-member-list" id="ocb-ml-dd" ondragover="event.preventDefault()" ondrop="ocbDrop(event,'dd')"></div>
+</div>
+          <div class="ocb-node dept-node" data-id="dept-dr" data-dept="dr" style="--nc:#1565C0;--nc2:#42A5F5;">
+  <div class="ocb-av-wrap" onclick="ocbAvatarClick(event,this)"><div class="ocb-av"><img class="ocb-photo" src="" alt=""><svg class="ocb-person-icon" viewBox="0 0 44 55" fill="none"><circle cx="22" cy="16" r="12" fill="#999"/><path d="M4 52 Q4 34 22 34 Q40 34 40 52 Z" fill="#999"/></svg></div><div class="ocb-badge">Draft</div><input type="file" class="ocb-file-in" accept="image/*" style="display:none" onchange="ocbPhotoLoad(this)"></div>
+  <div class="ocb-card" onclick="ocbDeptCardClick(event,'dr')"><div class="ocb-name" contenteditable="false">Draughting</div><div class="ocb-role" contenteditable="false" id="ocb-role-dr">Click to view team</div><div class="ocb-count" id="ocb-cnt-dr"></div></div>
+  <div class="ocb-member-list" id="ocb-ml-dr" ondragover="event.preventDefault()" ondrop="ocbDrop(event,'dr')"></div>
 </div>
           <div class="ocb-node dept-node" data-id="dept-pt" data-dept="pt" style="--nc:#BF360C;--nc2:#F4511E;">
   <div class="ocb-av-wrap" onclick="ocbAvatarClick(event,this)"><div class="ocb-av"><img class="ocb-photo" src="" alt=""><svg class="ocb-person-icon" viewBox="0 0 44 55" fill="none"><circle cx="22" cy="16" r="12" fill="#999"/><path d="M4 52 Q4 34 22 34 Q40 34 40 52 Z" fill="#999"/></svg></div><div class="ocb-badge">PT</div><input type="file" class="ocb-file-in" accept="image/*" style="display:none" onchange="ocbPhotoLoad(this)"></div>
@@ -2758,6 +2802,7 @@ Required?</text>
 <script id="ocb-js">
 (function(){
 
+/*@DATA:OCB_MEMBERS@*/
 var OCB_MEMBERS = {
   md:[],ceo:[],bdd:[],opsd:[],pjd:[],
   bd:   [{ini:'TM',nm:'Tee Mun Muk',rl:'Senior Manager'},{ini:'LJ',nm:'Lim Jia Yin',rl:'Assoc Manager'},{ini:'LT',nm:'Lim Tae Ling',rl:'Assoc Manager'},{ini:'NA',nm:'Nurul Aqma',rl:'Exec – Sales Support'},{ini:'NI',nm:'Nur Izzatty Syahirah',rl:'Exec – Pre-Design'},{ini:'T',nm:'TBA',rl:'Exec – Admin & Ops'}],
@@ -2765,13 +2810,16 @@ var OCB_MEMBERS = {
   al:   [{ini:'FS',nm:'Faziha Shaheerah',rl:'Manager'},{ini:'NA',nm:'Nur Ain',rl:'Executive'},{ini:'NA',nm:'Nur Atiqah',rl:'Executive'}],
   sc:   [{ini:'KJ',nm:'Kwan Jin Yee',rl:'Executive'},{ini:'LP',nm:'Lim Pei Mun',rl:'Executive'},{ini:'NI',nm:'Nur Idayu',rl:'Assoc Manager'}],
   dd:   [{ini:'NI',nm:'Nur Idayu',rl:'Assoc Manager'},{ini:'DA',nm:'Dilasini A/P Ravichandran',rl:'Executive'},{ini:'NK',nm:'Ng Kae Zhe',rl:'Executive'}],
+  dr:   [],
   pt:   [],
   safety:[{ini:'V',nm:'Vacant',rl:'Manager'},{ini:'MS',nm:'Muhammad Shahrun Azam',rl:'Safety Supervisor (LSS)'},{ini:'MN',nm:'Muhammad Nurhaziq',rl:'Safety Supervisor'}],
   postc:[{ini:'T',nm:'TBA',rl:'Post Contract Manager'},{ini:'T',nm:'TBA',rl:'Post Contract Executive'}],
   lss:  [{ini:'T',nm:'TBA',rl:'Sr Executive'},{ini:'DL',nm:'Desmond Liew Wai Jun',rl:'Project Engineer'},{ini:'WY',nm:'Woo Yun Le',rl:'Project Engineer'}],
 };
+/*@END:OCB_MEMBERS@*/
 
 /* ══ PROJECT TEAM sub-team data ══ */
+/*@DATA:OCB_PT@*/
 var OCB_PT = {
   northern:[
     {ini:'SA',nm:'Shazri Ali',      rl:'Project Manager'},
@@ -2789,6 +2837,7 @@ var OCB_PT = {
     {ini:'T', nm:'TBA',             rl:'Site Supervisor'}
   ]
 };
+/*@END:OCB_PT@*/
 var OCB_PT_LABELS = {northern:'🌏 Northern',central:'🏙 Central',southern:'🌴 Southern'};
 var OCB_PT_COLS   = {northern:'#6D4C41',central:'#BF360C',southern:'#E64A19'};
 
@@ -2971,6 +3020,8 @@ function ocbRenderPTMemberList(){
 function ocbSaveMember(dk,idx,field,val){
   if(OCB_MEMBERS[dk]&&OCB_MEMBERS[dk][idx]){
     OCB_MEMBERS[dk][idx][field]=val.trim();
+    syncDeptFromOCB(dk);
+    saveDeptMembersLS();
   }
 }
 
@@ -2980,6 +3031,8 @@ function ocbAddMember(dk){
   OCB_MEMBERS[dk].push({ini:'?',nm:'New Member',rl:'Role'});
   ocbRenderMemberList(dk);
   ocbUpdateCount(dk);
+  syncDeptFromOCB(dk);
+  saveDeptMembersLS();
 }
 
 /* ══ DELETE MEMBER ══ */
@@ -2988,6 +3041,8 @@ function ocbDelMember(dk,idx){
   OCB_MEMBERS[dk].splice(idx,1);
   ocbRenderMemberList(dk);
   ocbUpdateCount(dk);
+  syncDeptFromOCB(dk);
+  saveDeptMembersLS();
 }
 
 /* ══ MOVE MEMBER between depts ══ */
@@ -3002,6 +3057,9 @@ function ocbMoveMember(fromDk,idx,toDk){
   /* re-render target if open */
   var targetML=document.getElementById('ocb-ml-'+toDk);
   if(targetML&&targetML.classList.contains('show'))ocbRenderMemberList(toDk);
+  syncDeptFromOCB(fromDk);
+  syncDeptFromOCB(toDk);
+  saveDeptMembersLS();
 }
 
 /* ══ DRAG & DROP (reorder + move between depts) ══ */
@@ -3032,6 +3090,9 @@ function ocbDrop(e,toDk){
   ocbUpdateCount(fromDk);
   ocbUpdateCount(toDk);
   ocbDragSrc=null;
+  syncDeptFromOCB(fromDk);
+  syncDeptFromOCB(toDk);
+  saveDeptMembersLS();
 }
 
 /* ══ EDIT MODE ══ */
@@ -3058,6 +3119,7 @@ function ocbToggleEdit(){
     var dk=ml.id.replace('ocb-ml-','');
     ocbRenderMemberList(dk);
   });
+  if(!ocbEditMode){ saveDeptMembersLS(); saveToHTML(); }
   setTimeout(ocbDrawLines,120);
 }
 
@@ -3133,13 +3195,16 @@ function ocbDrawLines(){
 function ocbAddPTMember(st){
   OCB_PT[st].push({ini:'?',nm:'New Member',rl:'Role'});
   ocbRenderPTMemberList(); ocbUpdateCount('pt');
+  saveDeptMembersLS();
 }
 function ocbDelPTMember(st,idx){
   OCB_PT[st].splice(idx,1);
   ocbRenderPTMemberList(); ocbUpdateCount('pt');
+  saveDeptMembersLS();
 }
 function ocbSavePTMember(st,idx,field,val){
   if(OCB_PT[st]&&OCB_PT[st][idx]) OCB_PT[st][idx][field]=val.trim();
+  saveDeptMembersLS();
 }
 function ocbMovePTMember(fromSt,idx,dest){
   if(!dest)return;
@@ -3157,6 +3222,7 @@ function ocbMovePTMember(fromSt,idx,dest){
     var targetML=document.getElementById('ocb-ml-'+toDk);
     if(targetML&&targetML.classList.contains('show')) ocbRenderMemberList(toDk);
   }
+  saveDeptMembersLS();
 }
 var ocbPTDragSrc=null;
 function ocbPTDragStart(e,st,idx){ ocbPTDragSrc={st:st,idx:idx}; e.dataTransfer.effectAllowed='move'; }
@@ -3168,6 +3234,7 @@ function ocbPTDrop(e,toSt){
   OCB_PT[toSt].push(m);
   ocbPTDragSrc=null;
   ocbRenderPTMemberList(); ocbUpdateCount('pt');
+  saveDeptMembersLS();
 }
 
 window.ocbToggleEdit   = ocbToggleEdit;
@@ -3192,6 +3259,9 @@ window.ocbDragEnd      = ocbDragEnd;
 window.ocbDrop         = ocbDrop;
 window.ocbDrawLines    = ocbDrawLines;
 
+window.OCB_MEMBERS = OCB_MEMBERS;
+window.OCB_PT      = OCB_PT;
+
 ocbInit();
 
 })();
@@ -3200,7 +3270,7 @@ ocbInit();
 <div id="page-dept-bd" class="page">
 <div class="page-wrap">
 <button class="back-btn" onclick="navigate('teams')">← <span class="en">Back to Teams</span><span class="bm">Kembali ke Pasukan</span></button>
-<div class="dept-hero" style="background:linear-gradient(135deg,#E8500A,#E8500ACC);">
+<div class="dept-hero dept-hero-bd" style="background:linear-gradient(135deg,#E8500A,#E8500ACC);">
 <div class="dept-hero-icon">🔶</div>
 <div>
 <h2 class="en">BD – Business Development</h2>
@@ -3351,7 +3421,7 @@ ocbInit();
 <div id="page-dept-precon" class="page">
 <div class="page-wrap">
 <button class="back-btn" onclick="navigate('teams')">← <span class="en">Back to Teams</span><span class="bm">Kembali ke Pasukan</span></button>
-<div class="dept-hero" style="background:linear-gradient(135deg,#117A65,#117A65CC);">
+<div class="dept-hero dept-hero-precon" style="background:linear-gradient(135deg,#117A65,#117A65CC);">
 <div class="dept-hero-icon">🟢</div>
 <div>
 <h2 class="en">PreCon – Pre-Commissioning</h2>
@@ -3473,13 +3543,13 @@ ocbInit();
 <div id="page-dept-dd" class="page">
 <div class="page-wrap">
 <button class="back-btn" onclick="navigate('teams')">← <span class="en">Back to Teams</span><span class="bm">Kembali ke Pasukan</span></button>
-<div class="dept-hero" style="background:linear-gradient(135deg,#2471A3,#2471A3CC);">
+<div class="dept-hero dept-hero-dd" style="background:linear-gradient(135deg,#2471A3,#2471A3CC);">
 <div class="dept-hero-icon">🔵</div>
 <div>
-<h2 class="en">D&D – Design & Drafting</h2>
-<h2 class="bm">D&D – Rekabentuk & Pelan</h2>
-<p class="en">CAS/PSS, shop drawings, BOM, quantity check, T&C endorsement, as-built drawings</p>
-<p class="bm">CAS/PSS, lukisan binaan, BOM, semakan kuantiti, pengesahan T&C, lukisan siap bina</p>
+<h2 class="en">Design Team</h2>
+<h2 class="bm">Pasukan Rekabentuk</h2>
+<p class="en">CAS/PSS, shop drawings, electrical design, structural design, T&C endorsement</p>
+<p class="bm">CAS/PSS, lukisan binaan, rekabentuk elektrik, rekabentuk struktur, pengesahan T&C</p>
 </div></div>
 <div class="vla-wrap" style="border-left-color:#2471A3;background:linear-gradient(135deg,#2471A318,var(--surface));">
   <div class="vla-title" style="color:#2471A3;">⚡ My Responsibility Flow</div>
@@ -3641,10 +3711,69 @@ ocbInit();
 </div>
 </div>
 </div></div>
+<div id="page-dept-dr" class="page">
+<div class="page-wrap">
+<button class="back-btn" onclick="navigate('teams')">← <span class="en">Back to Teams</span><span class="bm">Kembali ke Pasukan</span></button>
+<div class="dept-hero dept-hero-dr" style="background:linear-gradient(135deg,#1565C0,#1565C0CC);">
+<div class="dept-hero-icon">📐</div>
+<div>
+<h2 class="en">Draughting Team</h2>
+<h2 class="bm">Pasukan Pelan Teknikal</h2>
+<p class="en">As-built drawings, technical layouts, drawing archives, structural plans</p>
+<p class="bm">Lukisan siap bina, pelan teknikal, arkib lukisan, pelan struktur</p>
+</div></div>
+<div class="vla-wrap" style="border-left-color:#1565C0;background:linear-gradient(135deg,#1565C018,var(--surface));">
+  <div class="vla-title" style="color:#1565C0;">⚡ My Responsibility Flow</div>
+  <div class="vla-steps" style="flex-wrap:wrap;"><div class="vla-step"><div class="vla-step-icon" style="box-shadow:0 3px 0 #1565C0,0 6px 14px rgba(0,0,0,.12);">🏗️</div><div class="vla-step-label">As-Built<br>Drawing</div></div><div class="vla-arrow">→</div><div class="vla-step"><div class="vla-step-icon" style="box-shadow:0 3px 0 #1565C0,0 6px 14px rgba(0,0,0,.12);">📦</div><div class="vla-step-label">BOM<br>Update</div></div><div class="vla-arrow">→</div><div class="vla-step"><div class="vla-step-icon" style="box-shadow:0 3px 0 #1565C0,0 6px 14px rgba(0,0,0,.12);">✅</div><div class="vla-step-label">Review &<br>Approve</div></div><div class="vla-arrow">→</div><div class="vla-step"><div class="vla-step-icon" style="box-shadow:0 3px 0 #1565C0,0 6px 14px rgba(0,0,0,.12);">💾</div><div class="vla-step-label">Archive</div></div></div>
+  <div style="margin-top:10px;font-size:11px;color:var(--text-m);">Click <strong style="color:#1565C0;">Show My Tasks in Flowchart</strong> below to see where you appear in the process.</div>
+</div>
+
+<div class="dept-actions">
+<button class="dept-action-btn primary" style="background:#1565C0;border-color:#1565C0;" onclick="highlightAndGo('dr')">🔍 <span class="en">Show My Tasks in Flowchart</span><span class="bm">Tunjukkan Tugasan Saya dalam Carta Alir</span></button>
+<button class="dept-action-btn outline" onclick="navigate('flow')">🔄 <span class="en">View Full Flowchart</span><span class="bm">Lihat Carta Alir Penuh</span></button>
+</div>
+
+<div class="dept-members-section" id="dms-dr"></div>
+
+<div class="step-card">
+<div class="step-header" onclick="toggleStep(this)">
+<div class="step-num" style="background:#1565C0;">1</div>
+<div class="step-body-wrap"><div class="step-title-en en">As-Built Drawing Preparation</div><div class="step-title-bm bm">Penyediaan Lukisan Siap Bina</div></div>
+<div class="step-arrow">▼</div></div>
+<div class="step-body">
+<ul>
+<li class="en">When tagged by Project Team, Draughting Manager assigns draughter</li>
+<li class="en">Draughter prepares As-Built drawing based on actual installed configuration</li>
+<li class="en">Draughter attaches drawing in job comment for review</li>
+<li class="bm">Apabila di-tag oleh Pasukan Projek, Pengurus Pelan tugaskan jurutera pelukis</li>
+<li class="bm">Jurutera pelukis sediakan Lukisan Siap Bina berdasarkan konfigurasi sebenar</li>
+<li class="bm">Jurutera pelukis lampirkan lukisan dalam komen kerja untuk semakan</li>
+</ul>
+<div class="box-form"><strong class="en">📋 Form/Document:</strong><strong class="bm">📋 Borang/Dokumen:</strong> <span class="en">As-Built Drawing (PDF)</span><span class="bm">Lukisan Siap Bina (PDF)</span></div>
+</div>
+</div>
+<div class="step-card">
+<div class="step-header" onclick="toggleStep(this)">
+<div class="step-num" style="background:#1565C0;">2</div>
+<div class="step-body-wrap"><div class="step-title-en en">Review, Approval & Archiving</div><div class="step-title-bm bm">Semakan, Kelulusan & Pengarkiban</div></div>
+<div class="step-arrow">▼</div></div>
+<div class="step-body">
+<ul>
+<li class="en">Draughting Manager reviews as-built drawings for accuracy</li>
+<li class="en">Approved drawing attached at PROJECT level for client records</li>
+<li class="en">Drawing archived in designated folder with version control</li>
+<li class="bm">Pengurus Pelan menyemak lukisan siap bina untuk ketepatan</li>
+<li class="bm">Lukisan yang diluluskan dilampirkan di peringkat PROJEK untuk rekod pelanggan</li>
+<li class="bm">Lukisan diarkibkan dalam folder yang ditetapkan dengan kawalan versi</li>
+</ul>
+<div class="box-form"><strong class="en">📋 Form/Document:</strong><strong class="bm">📋 Borang/Dokumen:</strong> <span class="en">Final As-Built Drawing, Project Drawing Register</span><span class="bm">Lukisan Siap Bina Akhir, Daftar Lukisan Projek</span></div>
+</div>
+</div>
+</div></div>
 <div id="page-dept-pt" class="page">
 <div class="page-wrap">
 <button class="back-btn" onclick="navigate('teams')">← <span class="en">Back to Teams</span><span class="bm">Kembali ke Pasukan</span></button>
-<div class="dept-hero" style="background:linear-gradient(135deg,#2C3E63,#2C3E63CC);">
+<div class="dept-hero dept-hero-pt" style="background:linear-gradient(135deg,#2C3E63,#2C3E63CC);">
 <div class="dept-hero-icon">🟣</div>
 <div>
 <h2 class="en">PT – Project Team</h2>
@@ -3876,7 +4005,7 @@ ocbInit();
 <div id="page-dept-sc" class="page">
 <div class="page-wrap">
 <button class="back-btn" onclick="navigate('teams')">← <span class="en">Back to Teams</span><span class="bm">Kembali ke Pasukan</span></button>
-<div class="dept-hero" style="background:linear-gradient(135deg,#CA8A04,#CA8A04CC);">
+<div class="dept-hero dept-hero-sc" style="background:linear-gradient(135deg,#CA8A04,#CA8A04CC);">
 <div class="dept-hero-icon">🟡</div>
 <div>
 <h2 class="en">SC – Supply Chain</h2>
@@ -3994,7 +4123,7 @@ ocbInit();
 <div id="page-dept-al" class="page">
 <div class="page-wrap">
 <button class="back-btn" onclick="navigate('teams')">← <span class="en">Back to Teams</span><span class="bm">Kembali ke Pasukan</span></button>
-<div class="dept-hero" style="background:linear-gradient(135deg,#16A085,#16A085CC);">
+<div class="dept-hero dept-hero-al" style="background:linear-gradient(135deg,#16A085,#16A085CC);">
 <div class="dept-hero-icon">🟩</div>
 <div>
 <h2 class="en">A&L – Application & Licensing</h2>
@@ -4164,7 +4293,7 @@ ocbInit();
 <div id="page-dept-postc" class="page">
 <div class="page-wrap">
 <button class="back-btn" onclick="navigate('teams')">← <span class="en">Back to Teams</span><span class="bm">Kembali ke Pasukan</span></button>
-<div class="dept-hero" style="background:linear-gradient(135deg,#C0392B,#C0392BCC);">
+<div class="dept-hero dept-hero-postc" style="background:linear-gradient(135deg,#C0392B,#C0392BCC);">
 <div class="dept-hero-icon">🔴</div>
 <div>
 <h2 class="en">PostC – Post Contract</h2>
@@ -4372,7 +4501,7 @@ ocbInit();
 <div id="page-dept-safety" class="page">
 <div class="page-wrap">
 <button class="back-btn" onclick="navigate('teams')">← <span class="en">Back to Teams</span><span class="bm">Kembali ke Pasukan</span></button>
-<div class="dept-hero" style="background:linear-gradient(135deg,#945F1E,#945F1ECC);">
+<div class="dept-hero dept-hero-safety" style="background:linear-gradient(135deg,#945F1E,#945F1ECC);">
 <div class="dept-hero-icon">🟠</div>
 <div>
 <h2 class="en">Safety – Safety Team</h2>
@@ -4680,10 +4809,12 @@ ocbInit();
 // ── THEME ──────────────────────────────────────
 var _theme = localStorage.getItem('psol-theme') || 'light';
 document.documentElement.setAttribute('data-theme', _theme);
-  // capture workscope original HTML for reset
-  loadDeptMembersLS();
-  var _wsEl = document.getElementById('page-workscope');
-  if (_wsEl) wsOrigHTML = _wsEl.innerHTML;
+  // capture workscope original HTML for reset (deferred so all scripts are loaded first)
+  document.addEventListener('DOMContentLoaded', function(){
+    if(typeof loadDeptMembersLS==='function') loadDeptMembersLS();
+    var _wsEl2 = document.getElementById('page-workscope');
+    if(_wsEl2) wsOrigHTML = _wsEl2.innerHTML;
+  });
 function toggleTheme() {
   _theme = _theme === 'light' ? 'dark' : 'light';
   document.documentElement.setAttribute('data-theme', _theme);
@@ -5404,7 +5535,7 @@ function resetWs() {
 
 
 function highlightAllDepts() {
-  ['bd','precon','dd','pt','sc','al','postc','safety'].forEach(function(d){ highlightDept(d); });
+  ['bd','precon','dd','dr','pt','sc','al','postc','safety'].forEach(function(d){ highlightDept(d); });
 }
 function clearDeptHighlight() {
   document.querySelectorAll('.swim-row-highlighted').forEach(function(el){ el.classList.remove('swim-row-highlighted'); });
@@ -5771,7 +5902,7 @@ body {
   border-left:4px solid var(--nav-edge) !important;
   box-shadow:
     /* left accent column glow */
-    inset 4px 0 18px rgba(232,80,10,0.14),
+    inset 4px 0 18px var(--nav-glow),
     /* top-edge highlight */
     inset 0 1px 0 rgba(255,255,255,0.12),
     /* inner right shadow */
@@ -5806,14 +5937,14 @@ body {
 .nav-link  { color:rgba(255,255,255,0.82) !important;
   transition:background 0.18s,color 0.18s,transform 0.15s,box-shadow 0.18s !important; }
 .nav-link:hover  { background:var(--nav-glow) !important; color:#fff !important; transform:translateX(3px); }
-.nav-link.active { background:rgba(232,80,10,0.32) !important; color:#fff !important;
-  box-shadow:inset 3px 0 0 var(--nav-edge),0 3px 12px rgba(232,80,10,0.22) !important; }
+.nav-link.active { background:var(--nav-glow) !important; color:#fff !important;
+  box-shadow:inset 3px 0 0 var(--nav-edge),0 3px 12px var(--nav-glow) !important; }
 .nav-btn { background:rgba(255,255,255,0.08) !important; border:1px solid rgba(255,255,255,0.14) !important;
   color:rgba(255,255,255,0.88) !important; transition:background 0.18s,box-shadow 0.18s !important; }
-.nav-btn:hover { background:var(--nav-glow) !important; box-shadow:0 3px 10px rgba(232,80,10,0.22) !important; }
+.nav-btn:hover { background:var(--nav-glow) !important; box-shadow:0 3px 10px var(--nav-glow) !important; }
 [data-theme="dark"] #main-nav {
   box-shadow:inset -1px 0 0 rgba(255,255,255,0.04),5px 0 24px rgba(0,0,0,0.55),
-             14px 0 48px rgba(0,0,0,0.32),0 0 60px rgba(232,80,10,0.05) !important;
+             14px 0 48px rgba(0,0,0,0.32),0 0 60px var(--nav-glow) !important;
 }
 
 /* ── CONTENT SURFACES ────────────────────────────────────────────── */
@@ -8855,6 +8986,7 @@ document.addEventListener('DOMContentLoaded', function(){
 /* ══════════════════════════════════════════════════════════════
    DEPT PAGE MEMBER SYSTEM  — live-editable, localStorage-backed
    ══════════════════════════════════════════════════════════════ */
+/*@DATA:DEPT_MEMBERS@*/
 var DEPT_MEMBERS = {
   bd:[
     {ini:'TM',nm:'Tee Mun Muk',          rl:'Senior Manager'},
@@ -8881,6 +9013,7 @@ var DEPT_MEMBERS = {
     {ini:'DA',nm:'Dilasini A/P Ravichandran',    rl:'Executive'},
     {ini:'NK',nm:'Ng Kae Zhe',                   rl:'Executive'}
   ],
+  dr:[],
   pt:[
     {ini:'SA',nm:'Shazri Ali',      rl:'Project Manager – Northern'},
     {ini:'CC',nm:'Calvin Christie', rl:'Project Manager – Central'},
@@ -8909,11 +9042,13 @@ var DEPT_MEMBERS = {
     {ini:'WY',nm:'Woo Yun Le',                   rl:'LSS – Project Engineer'}
   ]
 };
+/*@END:DEPT_MEMBERS@*/
 
 var DEPT_PAGE_CFG = {
   'dept-bd':     {dk:'bd',     col:'#E8500A', title:'Business Development Team'},
   'dept-precon': {dk:'precon', col:'#27AE60', title:'Pre-Commissioning / QS Team'},
-  'dept-dd':     {dk:'dd',     col:'#2471A3', title:'Design & Drafting Team'},
+  'dept-dd':     {dk:'dd',     col:'#2471A3', title:'Design Team'},
+  'dept-dr':     {dk:'dr',     col:'#1565C0', title:'Draughting Team'},
   'dept-pt':     {dk:'pt',     col:'#7D3C98', title:'Project Team (PM + PC)'},
   'dept-sc':     {dk:'sc',     col:'#CA8A04', title:'Supply Chain Team'},
   'dept-al':     {dk:'al',     col:'#117A65', title:'Application & Licensing Team'},
@@ -8922,15 +9057,61 @@ var DEPT_PAGE_CFG = {
 };
 
 var deptMemberEditMode = {};
+var deptMembersOpen = {}; // track expand/collapse per dept
+
+function toggleDeptMembers(dk){
+  deptMembersOpen[dk] = !deptMembersOpen[dk];
+  var body = document.getElementById('dmb2-'+dk);
+  var arrow = body ? body.parentElement.querySelector('.dm-arrow2') : null;
+  if(body) body.style.display = deptMembersOpen[dk] ? 'block' : 'none';
+  if(arrow) arrow.style.transform = deptMembersOpen[dk] ? 'rotate(90deg)' : 'rotate(0deg)';
+}
+
+// Shared dept keys (same in OCB_MEMBERS and DEPT_MEMBERS)
+var OCB_DEPT_KEYS=['bd','precon','dd','dr','pt','sc','al','postc','safety'];
 
 function saveDeptMembersLS(){
+  // Save DEPT_MEMBERS
   try{ localStorage.setItem('psol-dept-members', JSON.stringify(DEPT_MEMBERS)); }catch(e){}
+  // Save OCB non-dept members (md, ceo, bdd, opsd, pjd)
+  var _ex={};
+  Object.keys(OCB_MEMBERS).forEach(function(k){ if(OCB_DEPT_KEYS.indexOf(k)<0) _ex[k]=OCB_MEMBERS[k]; });
+  try{ localStorage.setItem('psol-ocb-extra', JSON.stringify(_ex)); }catch(e){}
+  // Save OCB PT sub-teams
+  try{ localStorage.setItem('psol-ocb-pt', JSON.stringify(OCB_PT)); }catch(e){}
 }
+
 function loadDeptMembersLS(){
+  // Load DEPT_MEMBERS from storage
   try{
     var s=localStorage.getItem('psol-dept-members');
     if(s){ var d=JSON.parse(s); Object.keys(d).forEach(function(k){ DEPT_MEMBERS[k]=d[k]; }); }
   }catch(e){}
+  // Sync all dept keys into OCB_MEMBERS so both views start identical
+  OCB_DEPT_KEYS.forEach(function(k){ OCB_MEMBERS[k]=DEPT_MEMBERS[k]||[]; });
+  // Load OCB non-dept members (md, ceo, bdd, opsd, pjd)
+  try{
+    var s2=localStorage.getItem('psol-ocb-extra');
+    if(s2){ var e2=JSON.parse(s2); Object.keys(e2).forEach(function(k){ OCB_MEMBERS[k]=e2[k]; }); }
+  }catch(e){}
+  // Load OCB PT sub-teams
+  try{
+    var s3=localStorage.getItem('psol-ocb-pt');
+    if(s3){ var pt=JSON.parse(s3); Object.keys(pt).forEach(function(k){ if(OCB_PT[k]!==undefined) OCB_PT[k]=pt[k]; }); }
+  }catch(e){}
+}
+
+// ── Cross-view sync helpers ──────────────────────────────────
+// Call after any DEPT edit to push changes into OCB view
+function syncOCBFromDept(dk){
+  OCB_MEMBERS[dk]=DEPT_MEMBERS[dk]||[];
+  if(typeof ocbUpdateCount==='function') ocbUpdateCount(dk);
+  var ml=document.getElementById('ocb-ml-'+dk);
+  if(ml&&ml.classList.contains('show')&&typeof ocbRenderMemberList==='function') ocbRenderMemberList(dk);
+}
+// Call after any OCB edit to push changes into DEPT view
+function syncDeptFromOCB(dk){
+  if(OCB_DEPT_KEYS.indexOf(dk)>=0) DEPT_MEMBERS[dk]=OCB_MEMBERS[dk]||[];
 }
 
 function renderDeptMemberSection(pageKey){
@@ -8940,20 +9121,31 @@ function renderDeptMemberSection(pageKey){
   var dk=cfg.dk, col=cfg.col, title=cfg.title;
   var editMode=deptMemberEditMode[dk]||false;
   var members=DEPT_MEMBERS[dk]||[];
+  if(deptMembersOpen[dk]===undefined) deptMembersOpen[dk]=true;
+  var isOpen=deptMembersOpen[dk];
 
-  var html='<div class="dept-members-hdr">'
-    +'<span style="color:'+col+';">&#128101;</span>&nbsp;'+title
-    +'<button class="dm-edit-btn" style="background:'+col+';color:#fff;" '
-    +'onclick="toggleDeptEdit(\''+dk+'\',\''+pageKey+'\')">'
-    +(editMode?'&#10003; Done':'&#9998; Edit Members')
-    +'</button></div>';
+  var html='<div class="dept-members-panel">';
+  // ── Toggle header ──
+  html+='<div class="dept-members-hdr2" style="border-left:3px solid '+col+';">';
+  html+='<div class="dept-members-toggle2" onclick="toggleDeptMembers(\''+dk+'\')">';
+  html+='<span class="dm-arrow2" style="transform:'+(isOpen?'rotate(90deg)':'rotate(0deg)')+'">&#9658;</span>';
+  html+='<span style="color:var(--text-p);">&#128101; '+title+'</span>';
+  html+='<span class="dm-count2">('+members.length+' member'+(members.length!==1?'s':'')+')</span>';
+  html+='</div>';
+  html+='<button class="dm-edit-btn" style="background:'+col+';color:#fff;" '
+    +'onclick="toggleDeptEdit(\''+dk+'\',\''+pageKey+'\')">';
+  html+=(editMode?'&#10003; Done':'&#9998; Edit Members')+'</button>';
+  html+='</div>';
+
+  // ── Collapsible body ──
+  html+='<div class="dept-members-body2" id="dmb2-'+dk+'" style="display:'+(isOpen?'block':'none')+';">';
 
   if(members.length===0){
-    html+='<div style="padding:14px 0;color:var(--text-m);font-size:12px;font-style:italic;text-align:center;">No members yet — click <b>Edit Members</b> to add.</div>';
+    html+='<div style="padding:14px 0;color:var(--text-m);font-size:12px;font-style:italic;text-align:center;">No members yet &mdash; click <b>Edit Members</b> to add.</div>';
   }
 
   var _mvOpts=Object.keys(DEPT_PAGE_CFG).filter(function(pk){return DEPT_PAGE_CFG[pk].dk!==dk;})
-    .map(function(pk){var cc=DEPT_PAGE_CFG[pk];return '<option value="'+pk+'">'+cc.title.replace(' Team','')+'</option>';})
+    .map(function(pk){var cc=DEPT_PAGE_CFG[pk];return '<option value="'+pk+'">'+cc.title.replace(' Team','')+' </option>';})
     .join('');
 
   members.forEach(function(m,i){
@@ -8981,9 +9173,11 @@ function renderDeptMemberSection(pageKey){
 
   if(editMode){
     html+='<button class="dm-add-btn" style="background:'+col+';color:#fff;" '
-      +'onclick="deptAddMember(\''+dk+'\',\''+pageKey+'\')">+ Add Member</button>';
+      +'onclick="deptAddMember(\''+dk+'\',\''+pageKey+'\')">&plus; Add Member</button>';
   }
 
+  html+='</div>'; // close body
+  html+='</div>'; // close panel
   container.innerHTML=html;
 }
 
@@ -8994,6 +9188,7 @@ function escHtml(s){
 function toggleDeptEdit(dk, pageKey){
   deptMemberEditMode[dk]=!deptMemberEditMode[dk];
   renderDeptMemberSection(pageKey);
+  if(!deptMemberEditMode[dk]){ saveDeptMembersLS(); saveToHTML(); }
 }
 
 function deptSaveMember(dk, idx, field, val){
@@ -9006,12 +9201,14 @@ function deptSaveMember(dk, idx, field, val){
     if(av) av.textContent=DEPT_MEMBERS[dk][idx].ini;
   }
   saveDeptMembersLS();
+  syncOCBFromDept(dk);
 }
 
 function deptAddMember(dk, pageKey){
   if(!DEPT_MEMBERS[dk]) DEPT_MEMBERS[dk]=[];
   DEPT_MEMBERS[dk].push({ini:'?',nm:'New Member',rl:'Role / Position'});
   saveDeptMembersLS();
+  syncOCBFromDept(dk);
   renderDeptMemberSection(pageKey);
 }
 
@@ -9023,14 +9220,83 @@ function deptMoveMember(fromDk, idx, toPageKey, fromPageKey){
   if(!DEPT_MEMBERS[toDk]) DEPT_MEMBERS[toDk]=[];
   DEPT_MEMBERS[toDk].push(m);
   saveDeptMembersLS();
+  syncOCBFromDept(fromDk);
+  syncOCBFromDept(toDk);
   renderDeptMemberSection(fromPageKey);
 }
 function deptDelMember(dk, idx, pageKey){
   if(!DEPT_MEMBERS[dk]) return;
   DEPT_MEMBERS[dk].splice(idx,1);
   saveDeptMembersLS();
+  syncOCBFromDept(dk);
   renderDeptMemberSection(pageKey);
 }
+
+/* ══ SAVE HTML TO FILE ════════════════════════════════════════════════════ */
+function saveToHTML(){
+  /* Collect current data */
+  var ocbM  = JSON.stringify(window.OCB_MEMBERS || {});
+  var ocbPT = JSON.stringify(window.OCB_PT || {});
+  var deptM = JSON.stringify(DEPT_MEMBERS || {});
+
+  /* Get live HTML source */
+  var src = '<!DOCTYPE html>\n' + document.documentElement.outerHTML;
+
+  /* Replace data blocks using markers */
+  src = src.replace(/\/\*@DATA:OCB_MEMBERS@\*\/[\s\S]*?\/\*@END:OCB_MEMBERS@\*\//,
+    '/*@DATA:OCB_MEMBERS@*/\nvar OCB_MEMBERS='+ocbM+';\n/*@END:OCB_MEMBERS@*/');
+  src = src.replace(/\/\*@DATA:OCB_PT@\*\/[\s\S]*?\/\*@END:OCB_PT@\*\//,
+    '/*@DATA:OCB_PT@*/\nvar OCB_PT='+ocbPT+';\n/*@END:OCB_PT@*/');
+  src = src.replace(/\/\*@DATA:DEPT_MEMBERS@\*\/[\s\S]*?\/\*@END:DEPT_MEMBERS@\*\//,
+    '/*@DATA:DEPT_MEMBERS@*/\nvar DEPT_MEMBERS='+deptM+';\n/*@END:DEPT_MEMBERS@*/');
+
+  var filename = decodeURIComponent(location.pathname.split('/').pop().split('\\').pop()) || 'SOP.html';
+
+  /* Try showSaveFilePicker (Chrome/Edge — writes directly to same file) */
+  if(window.showSaveFilePicker){
+    window.showSaveFilePicker({
+      suggestedName: filename,
+      types:[{description:'HTML File',accept:{'text/html':['.html']}}]
+    }).then(function(fh){
+      return fh.createWritable();
+    }).then(function(w){
+      return w.write(src).then(function(){ return w.close(); });
+    }).then(function(){
+      showSaveToast('✅ File saved successfully');
+    }).catch(function(e){
+      if(e && e.name !== 'AbortError') dlSave(src, filename);
+    });
+  } else {
+    dlSave(src, filename);
+  }
+}
+
+function dlSave(src, filename){
+  var blob = new Blob([src], {type:'text/html;charset=utf-8'});
+  var a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = filename;
+  document.body.appendChild(a); a.click();
+  setTimeout(function(){ URL.revokeObjectURL(a.href); a.remove(); }, 1200);
+  showSaveToast('✅ HTML downloaded — replace the original file with this one');
+}
+
+function showSaveToast(msg){
+  var t = document.getElementById('psol-save-toast');
+  if(!t){
+    t = document.createElement('div'); t.id = 'psol-save-toast';
+    t.style.cssText = 'position:fixed;bottom:28px;right:28px;background:#1b5e20;color:#fff;'
+      +'padding:12px 22px;border-radius:12px;font-size:13px;font-weight:600;z-index:99999;'
+      +'box-shadow:0 4px 20px rgba(0,0,0,.3);opacity:0;transition:opacity .25s ease;pointer-events:none;';
+    document.body.appendChild(t);
+  }
+  t.textContent = msg;
+  t.style.opacity = '1';
+  clearTimeout(t._tid);
+  t._tid = setTimeout(function(){ t.style.opacity = '0'; }, 3500);
+}
+/* end SAVE TO HTML */
+
 /* end DEPT MEMBER SYSTEM */
 </script>
 
